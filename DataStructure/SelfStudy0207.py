@@ -1,28 +1,74 @@
-# 7-2
-def is_queue_full():
-    global Size, queue, front, rear
-    if rear == Size -1:
-        return True
-    else:
-        return False
+# 8-1
+class TreeNode():
+    def __init__(self):
+        self.right = None
+        self.left = None
+        self.data = None
 
 
-def de_queue():
-    global Size, queue, front, rear
-    if front == rear:
+def preorder(node):
+    if node == None:
         return
-    front += 1
-    data = queue[front]
-    queue[front] = None
-    return data
+    print(node.data, end='->')
+    preorder(node.left)
+    preorder(node.right)
 
 
-Size = 5
-front = -1
-rear = 0
-queue = ["화사", None, None, None, None]
+def inorder(node):
+    if node == None:
+        return
+    inorder(node.left)
+    print(node.data, end='->')
+    inorder(node.right)
 
-print(queue)
-print(f"추출한 데이터 --> {de_queue()}")
-print(queue)
-print("큐가 비었습니다.")
+
+def postorder(node):
+    if node == None:
+        return
+    postorder(node.left)
+    postorder(node.right)
+    print(node.data, end='->')
+
+
+node1 = TreeNode()
+node1.data = "화사"
+
+node2 = TreeNode()
+node2.data = "솔라"
+node1.left = node2
+
+node3 = TreeNode()
+node3.data = "문별"
+node1.right = node3
+
+node4 = TreeNode()
+node4.data = "휘인"
+node2.left = node4
+
+node5 = TreeNode()
+node5.data = "쯔위"
+node2.right = node5
+
+node6 = TreeNode()
+node6.data = "선미"
+node3.left = node6
+
+node7 = TreeNode()
+node7.data = "다현"
+node4.right = node7
+
+node8 = TreeNode()
+node8.data = "사나"
+node6.right = node8
+
+print('전위 순회 : ', end=' ')
+preorder(node1)
+print('끝')
+
+print('중위 순회 : ', end=' ')
+inorder(node1)
+print('끝')
+
+print('후위 순회 : ', end=' ')
+postorder(node1)
+print('끝')
