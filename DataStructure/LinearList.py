@@ -48,41 +48,93 @@
 # print(twice)
 #
 # # 선영 리스트의 응용 - 다항식 계산
-p = [7, -4, 0, 5]
-polyStr = "P(x) = "
-polyStr +=" + " + str(p[0]) + "x^" + str(3)
-print(polyStr)
+# p = [7, -4, 0, 5]
+# polyStr = "P(x) = "
+# polyStr +=" + " + str(p[0]) + "x^" + str(3)
+# print(polyStr)
+#
+#
+# def printPoly(px):
+#
+#     term = len(px) - 1      # 최고차항 숫자 = 배열 길이 - 1
+#     polyStr = "P(x) = "
+#
+#     for i in range(len(p)):
+#         coef = px[i]        # 계수
+#
+#         if coef>=0:
+#             polyStr +="+"
+#         polyStr += str(coef) + "X^" + str(term) +" "
+#         term -= 1
+#
+#     return polyStr
+#
+#
+# def calcPoly(xVal, px):
+#
+#     retValue = 0
+#     term = len(px) - 1      # 최고차항 숫자 = 배열 길이 - 1
+#
+#     for i in range(len(px)):
+#         coef = px[i]        # 계수
+#         retValue += coef * xVal ** term
+#         term -= 1
+#
+#     return retValue
+#
+#
+# if __name__=="__main__":
+#
+#     pStr = printPoly(p)
+#     print(pStr)
+#
+#     xValue = int(input("x값 ---> "))
+#     pxValue = calcPoly(xValue, p)
+#     print(pxValue)
 
-def printPoly(px):
-    term = len(px) - 1      # 최고차항 숫자 = 배열 길이 - 1
+# 특수 다항식의 선형 리스트 표현
+# P(x) = 7x^300-4x^20+5 --> 계수가 0인 x차수를 모조리 표현
+# px= [7, 0, 0, 0,...,5] -- 301개 : 배열이 너무 많아 처리하기에 불편
+px = [300, 20, 0]
+tx = [7, -4, 5]
+
+
+def printPoly(t_x, p_x):
+
     polyStr = "P(x) = "
+    count = len(p_x) - 1
 
-    for i in range(len(p)):
-        coef = px[i]        # 계수
 
-        if coef>=0:
-            polyStr +="+"
-        polyStr += str(coef) + "X^" + str(term) +" "
-        term -= 1
+    for i in range(len(p_x)):
+        term = t_x[i]   # 항 차수
+        coef = p_x[i]   # 계수
+
+        if coef > 0 and i >0:
+            polyStr = polyStr + "+"
+        elif coef == 0:
+            count -= 1
+            continue
+        polyStr = polyStr + f'{coef}x^{term}'
 
     return polyStr
 
-def calcPoly(xVal, px):
+
+def calcPoly(xValue, t_x, p_x):
+
     retValue = 0
-    term = len(px) - 1      # 최고차항 숫자 = 배열 길이 - 1
 
-    for i in range(len(px)):
-        coef = px[i]        # 계수
-        retValue += coef * xVal ** term
-        term -= 1
 
+    for i in range(len(p_x)):
+        term = t_x[i]
+        coef = p_x[i]
+        retValue += coef * xValue * term
     return retValue
 
+
 if __name__=="__main__":
+    xVal = int(input())
+    print(calcPoly(xVal, tx, px))
 
-    pStr = printPoly(p)
-    print(pStr)
 
-    xValue = int(input("x값 ---> "))
-    pxValue = calcPoly(xValue, p)
-    print(pxValue)
+
+
