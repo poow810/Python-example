@@ -1,19 +1,28 @@
-# 7-1
-def enQueue(data):
+# 7-2
+def is_queue_full():
     global Size, queue, front, rear
-    if rear == Size-1:
-        print("큐가 꽉 찼습니다.")
+    if rear == Size -1:
+        return True
+    else:
+        return False
+
+
+def de_queue():
+    global Size, queue, front, rear
+    if front == rear:
         return
-    rear += 1
-    queue[rear] = data
+    front += 1
+    data = queue[front]
+    queue[front] = None
+    return data
 
 
 Size = 5
-queue = ["화사", "솔라", "문별", "휘인", None]
 front = -1
-rear = 3
+rear = 0
+queue = ["화사", None, None, None, None]
 
 print(queue)
-enQueue("선미")
+print(f"추출한 데이터 --> {de_queue()}")
 print(queue)
-enQueue("재남")
+print("큐가 비었습니다.")
