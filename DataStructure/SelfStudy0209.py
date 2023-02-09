@@ -1,24 +1,24 @@
-# 11-2 랜덤 숫자 생성 후 내림차순 정렬
+# 12-1 랜덤하게 숫자 생성 후 내림차순으로 정렬, 그 횟수를 세기
 import random
+def quick_sort(ary):
+    global count
+    n = len(ary)
+    if n <= 1:
+        return ary
+
+    pivot = ary[n//2]
+    left_array, right_array = [], []
+
+    for num in ary:
+        if num > pivot:
+            right_array.append(num)
+        elif num < pivot:
+            left_array.append(num)
+    count += 1
+    return quick_sort(right_array) + [pivot] + quick_sort(left_array)
 
 
-def find_index(ary, num):       # 삽입될 위치 찾기
-    findidx = -1
-    for i in range(0, len(ary)):
-        if ary[i] < num:
-            findidx = i
-            break
-    if findidx == -1:
-        return len(ary)
-    else:
-        return findidx
-
-
-array = [random.randint(0, 200) for _ in range(10)]
-after_array = []
-
-for i in range(len(array)):
-    num = array[i]
-    max = find_index(after_array, num)  # after_array에 num을 담는 작업
-    after_array.insert(max, num)
-print(after_array)
+array = [random.randint(0, 200) for _ in range(20)]
+count = 0
+print(quick_sort(array))
+print(count)
