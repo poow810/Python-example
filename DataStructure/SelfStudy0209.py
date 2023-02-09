@@ -1,10 +1,12 @@
-# 10-2 구구단을 세로로 작성하기
-def gugu_dan(dan, num):
-    print(f"{dan} * {num} = {dan*num}")
-    if dan < 10 :
-        if num < 9:
-            return gugu_dan(dan, num+1)
+# 11-1 최댓값 위치 찾기
+def find_max_index(ary):
+    maxidx = 0
+    for i in range(0, len(ary)):
+        if ary[i] > ary[maxidx]:
+            maxidx = i
+    return ary[maxidx]
 
 
-for i in range(2, 10):
-    gugu_dan(i, 1)
+array = [1, 2, 10, 50, 45, 20]
+max = find_max_index(array)
+print(max)
