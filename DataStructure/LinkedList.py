@@ -1,89 +1,37 @@
+# 이중 연결 리스트 구현
 class Node():
     def __init__(self, data):
         self.data = data
-        self.link = None
+        self.nlink = None
+        self.plink = None
+
+
+def print_node(start):
+    current = start
+    if current.nlink == None:
+        return
+    print(current.data, end=" ")
+    while current.nlink != None:
+        current = current.nlink
+        print(current.data)
+    print(current.data, end=" ")
+    while current.plink != None:
+        current = current.plink
+        print(current.data)
 
 
 pre, current, head = None, None, None
-def print_node(start):
-    current = start
-    if current.link == None:
-        return
-    print(current.data, end=" ")
-    while current.link != start:
-        current = current.link
-        print(current.data, end=" ")
-    print()
+data_list = ["다현", "정연", "쯔위", "사나", "지효"]
 
+if __name__=="__main__":
 
-# 노드 삽입
-def insert_node(find_data, idx_data):
-    global head, current, pre
+    node = Node(data_list[0])
+    head = node
 
-    # 첫 번째에 삽입
-    if head.data == find_data:
-        node = Node(idx_data)
-        node.link = head
-        last = head
-        if last.link != head:
-            last = last.link
-        last.link = node
-        head = node
-        return
+    for data in data_list[1:0]:
+        pre = node
+        node = Node(data_list[1:])
+        pre.nlink = node
+        node.plink = pre
 
-    # 두 번째에 삽입
-    current = head
-    while current.link != head:
-        pre = current
-        current = current.link
-        if current.data == find_data:
-            node = Node(idx_data)
-            node.data = idx_data
-            node.link = current
-            pre.link = node
-            return
-
-    # 마지막에 삽입
-    node = Node(idx_data)
-    node.data = idx_data
-    current.link = node
-    node.link = head
-
-
-# 노드 삭제
-def del_node(delete_data):
-    global pre, current, head
-
-    # 첫 번째 노드 삭제
-    if head.data == delete_data:
-        current = head
-        head = head.link
-        last = head
-        while last.link != current:
-            last = last.link
-        last.link = head
-        del(current)
-        return
-
-    # 나머지 위치 노드 삭제
-    current = head
-    while current.link != head:
-        pre = current
-        current = current.link
-        if current.data == delete_data:
-            pre.link = current.link
-            del(current)
-            return
-
-
-# 노드 검색
-def search_node(find_data):
-    global pre, current, head
-
-    current = head
-    if current.data == find_data:
-        return current
-    while current.link != head:
-        current = current.link
-        if current.data == find_data:
-            return current
+    print_node(head)
