@@ -25,3 +25,5 @@ def del_data(data, idx):
 
 
 katok = []
+
+

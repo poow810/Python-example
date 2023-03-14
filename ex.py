@@ -1,10 +1,25 @@
-# 알파벳 같은 거 찾으려면 이중 반복문?
-S = input()
+def recursion(s, l, r):
+    global count
+    count += 1
+    if l >= r:
+        return 1
+    elif s[l] != s[r]:
+        return 0
+    else:
+        return recursion(s, l+1, r-1), count
+
+
+def is_palindrome(s):
+    return recursion(s, 0, len(s)-1)
+
 count = 0
-for i in S:
-    for j in len(S):
-        if j==i:
-            count+=1
 
+T = int(input())
+a = []
+b = []
+for i in range(T):
+    S = input()
+    a.append(is_palindrome(S))
+    b.append(is_palindrome(S))
 
-# Aaabbbbb
+print(is_palindrome(S))

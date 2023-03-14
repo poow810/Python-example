@@ -1,54 +1,60 @@
-# 헨젤과 그레텔의 집으로 돌아가기
-import random
-
-size = 10
-stack = [None for _ in range(size)]
-top = -1
-
-def is_stack_full():
-    global size, stack, top
-    if top >= size-1:
-        return True
-    else:
-        return False
-
-
-def is_stack_empty():
-    global size, stack, top
-    if top == -1:
-        return True
-    else:
-        return False
-
+import sys
 
 def push(data):
-    global size, stack, top
-    if is_stack_full():
-        return
+    global top, size, stack
+
     top = top + 1
     stack[top] = data
 
 
+def is_stack_empty():
+    global Size
+    if top == Size-1:
+        return 1
+    else:
+        return 0
+
+
 def pop():
-    global size, stack, top
+    global top, stack, size
     if is_stack_empty():
-        return None
+        return -1
     data = stack[top]
     stack[top] = None
     top = top - 1
     return data
 
 
-if __name__=="__main__":
-    color = ["빨강", "주황", "노랑", "초록", "파랑", "보라"]
-    random.shuffle(color)
-    for i in color:
-        push(i)
-        print(i, '-->', end=" ")
-    print("과자집")
-    while True:
-        i = pop()
-        if i == None:
-            break
-        print(i, '-->', end=" ")
-    print("우리집")
+def size():
+    global stack
+    return len(stack)
+
+
+def top():
+    if is_stack_empty():
+        return -1
+    return stack[-1]
+
+
+N = int(input())
+top = -1
+stack = []
+num = 0
+Size = 100000
+for i in range(N):
+    a = sys.stdin.readline().rstrip().split()
+    if a[0] == 'top':
+        if is_stack_empty():
+            print(-1)
+        print(stack[-1])
+
+    elif a[0] == 'size':
+        print(size())
+
+    elif a[0] == 'empty':
+        print(is_stack_empty())
+
+    elif a[0] == 'pop':
+        print(pop())
+    else:
+        push(a[1])
